@@ -1,0 +1,112 @@
+import java.util.Scanner;
+
+/* Statement
+In Pallet town of Kanto region, there lived a young boy named Ash Ketchum. Ash loves Pokemon and has a dream of becoming a Pokemon Master. He is about to start his Pokemon journey so he reaches to Professor Oak to get his first starter Pokemon. Before giving Ash his starter Pokemon, Professor Oak needs to check whether he is capable of raising a Pokemon or not. So, the professor gave him a task to test his knowledge about Pokemon. The task is as follows:
+
+Each Pokemon can be represented by a unique ID number and its strength is equivalent to the total number of factors (including 1 and number itself) of its ID number. In a Pokemon battle, a Pokemon with higher strength will always win a battle against a Pokemon with lower strength. Let the total number of Pokemon's in Kanto region be N(their ID ranging from 1 to N). Given a Pokemon ID number K. Find the total number of Pokemon, the given Pokemon can certainly beat.
+
+Input Format:
+First line of input contains space separated T and N, where T denotes the total number of test cases.
+Each test case contains an integer K.
+
+Output Format:
+For every test case, output the correct answer in new line.
+
+Constraints:
+1 ≤ T ≤ 105
+1 ≤ N ≤ 106
+1 ≤ K ≤ N
+
+SAMPLE INPUT 
+2 8
+3
+4
+SAMPLE OUTPUT 
+1
+5
+Explanation
+For N = 8, strength distribution of every Pokemon is given corresponding to its ID number where strength is equal to the number of factors of ID number. For example- Pokemon with ID no. 8 has strength equal to 4 (Factors of 8 are 1, 2, 4, 8).
+
+ID No.     Strength
+  1       1
+  2       2
+  3       2
+  4       3
+  5       2
+  6       4
+  7       2
+  8       4
+
+Sample Test Case 1: For K = 3, Pokemon with ID no. 3 has strength equal to 2. It can only defeat Pokemon with ID no. 1. Therefore, the answer is 1.
+
+Sample Test Case 2 : For K = 4, Pokemon with ID no. 4 has strength equal to 3. It can defeat Pokemon with ID no. 1, 2, 3, 5 and 7. Therefore, the answer is 5.
+
+*/
+// Warning: Printing unwanted or ill-formatted data to output will cause the test cases to fail
+
+public class Pokemon {
+    public static void main(String args[] ) throws Exception {
+        /* Sample code to perform I/O:
+         * Use either of these methods for input
+
+        //BufferedReader
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String name = br.readLine();                // Reading input from STDIN
+        System.out.println("Hi, " + name + ".");    // Writing output to STDOUT
+*/
+        //Scanner
+        Scanner s = new Scanner(System.in);
+        System.out.println("Enter values of n and t");
+        int t = s.nextInt(); 
+        int n = s.nextInt();
+        int[] id= new int[t];
+        int[] f= new int[n];
+        for(int i=0;i<t;i++)
+        {
+            id[i]=s.nextInt();
+            //f[i]=fact(id[i]);
+            //System.out.println(id[i]);
+        }// Reading input from STDIN
+        //System.out.println("Hi, " + t + "n ="+ n);    // Writing output to STDOUT
+        for(int i=0;i<n;i++)
+        {
+            f[i]=fact(i+1);
+            //System.out.println(i+" " +f[i]);
+        }
+        int h=0,co=0,j=7;
+        for(int i=0;i<t;i++)
+        {
+       // int j==n
+         h=f[--id[i]];
+        // System.out.println(id[i] +" "+h);
+         co=0;
+         j=7;
+        while(j>=0)
+        {
+            if(h>f[j])
+            {
+          //  System.out.println(f[j] +" "+h);
+            co++;
+            }
+            j--;
+        }
+        System.out.println(co);
+    }
+        // Write your code here
+
+    }
+
+   static int fact(int pid)
+    {
+        int y=pid-1,fact=1;   
+        while(y!=0)
+        {
+            if(pid%y==0)
+            {
+                fact++;
+            }
+            y--;
+        }
+        return fact;
+    }
+}
